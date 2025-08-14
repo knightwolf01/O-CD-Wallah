@@ -139,7 +139,7 @@ const App = () => {
     setIsProcessing(true);
     setMessages(prev => [...prev, { type: 'user', content: promptText, timestamp: new Date().toLocaleTimeString() }]);
     try {
-      const resp = await fetch('/api/generate', {
+      const resp = await fetch('https://o-cd-wallah-1.onrender.com/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: `You are an expert web developer. Produce full website files (index.html, style.css, script.js) in separate code blocks with filename hints. The user asked: ${promptText}`, model })
