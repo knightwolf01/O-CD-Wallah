@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: ocd-wallah-backend
+    runtime: node
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: CLIENT_URL
+        value: https://ocd-wallah.onrender.com
+      - key: PORT
+        value: 3000
+
+  - type: static
+    name: ocd-wallah-frontend
+    buildCommand: cd frontend && npm install && npm run build
+    publishDir: frontend/dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://ocd-wallah-backend.onrender.com
