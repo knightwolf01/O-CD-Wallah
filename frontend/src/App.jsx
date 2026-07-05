@@ -135,15 +135,15 @@
       setMessages(prev => [...prev, { type: 'success', content: `✅ Generated ${Object.keys(files).length} files: ${Object.keys(files).join(', ')}`, timestamp: new Date().toLocaleTimeString() }]);
     };
 
-    const callGenerate = async (promptText) => {
-      setIsProcessing(true);
-      setMessages(prev => [...prev, { type: 'user', content: promptText, timestamp: new Date().toLocaleTimeString() }]);
-      try {
-        const resp = await fetch(`/api/generate`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ prompt: `You are an expert web developer. Produce full website files (index.html, style.css, script.js) in separate code blocks with filename hints. The user asked: ${promptText}`, model })
-        });
+  const callGenerate = async (promptText) => {
+    setIsProcessing(true);
+    setMessages(prev => [...prev, { type: 'user', content: promptText, timestamp: new Date().toLocaleTimeString() }]);
+    try {
+      const resp = await fetch('/api/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: `You are an expert web developer. Produce full website files (index.html, style.css, script.js) in separate code blocks with filename hints. The user asked: ${promptText}`, model })
+      });
 
         const data = await resp.json();
         if (!resp.ok) {
